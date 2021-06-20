@@ -9,6 +9,8 @@
   </div>
 <% end %>
 
+<%= render 'layouts/base', user: @user, book: @book %>
+
 <% @books.each do |book| %>
 <div>
   <p>Title<br><%= book.title %></p>

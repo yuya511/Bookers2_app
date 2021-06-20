@@ -1,24 +1,8 @@
 <div class="notice">
   <%= notice %>
 </div>
-<!-- ユーザーの情報 -->
-<h3>User info</h3>
-<%= attachment_image_tag @user, :profile_image %>
-<h4>name</h4>
-<%= @user.name %>
-<h4>introduction</h4>
-<%= @user.introduction %><br>
-<%= link_to 'プロフィール変更', edit_user_path(@user.id) %>
 
-<!-- 新規本投稿 -->
-<h3>New book</h3>
-<%= form_with model: @book, local:true do |f| %>
-<h4>Title</h4>
-<%= f.text_field :title %>
-<h4>Opinion</h4>
-<%= f.text_area :body %>
-<%= f.submit 'Create Book' %>
-<% end %>
+<%= render 'layouts/base', user: @user, book: @book %>
 
 <!-- ユーザーの紹介した本一覧 -->
 <h3>Books</h3>
