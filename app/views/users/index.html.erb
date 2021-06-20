@@ -1,1 +1,13 @@
-<h1>Users/index.html.erb</h1>
+<h1>Users</h1>
+<% @users.each do |user| %>
+<p>
+  <h4>image</h4>
+  <%= attachment_image_tag user, :profile_image %>
+</p>
+<p>
+  <h4>name: <%= user.name %></h4>
+</p>
+<p>
+  <%= link_to 'Show', user_path(user.id) %>
+</p>
+<% end %>
