@@ -22,7 +22,7 @@
 <% @books.each do |book| %>
 <div>
   <p>
-    title: <%= book.title %><br>
+    title: <%= link_to book.title, book_path(book.id) %><br>
     body: <%= book.body %>
   </p>
 </div>
