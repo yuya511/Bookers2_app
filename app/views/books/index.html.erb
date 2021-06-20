@@ -1,0 +1,7 @@
+<% @books.each do |book| %>
+<div>
+  <p>Title<br><%= book.title %></p>
+  <p>Opinion<br><%= book.body %></p>
+  <p>id<br><%= book.user_id %></p>
+</div>
+<% end %>
