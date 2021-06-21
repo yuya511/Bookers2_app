@@ -11,10 +11,22 @@
 
 <%= render 'layouts/base', user: @user, book: @book %>
 
-<% @books.each do |book| %>
-<div>
-  <p>Title<br><%= book.title %></p>
-  <p>Opinion<br><%= book.body %></p>
-  <p>id<br><%= book.user_id %></p>
+<div class="col-7 offset-1">
+  <!-- ユーザーの紹介した本一覧 -->
+  <h3 class="mt-4">Books</h3>
+  <table class="table">
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+    </tr>
+    <% @books.each do |book| %>
+      <% bookuser = User.find(book.user_id) %>
+      <tr>
+        <th><%= attachment_image_tag bookuser, :profile_image, format: 'jpeg', size: "50x50" %></th>
+        <th><%= link_to book.title, book_path(book.id) %></th>
+        <th><%= book.body %></th>
+      </tr>
+    <% end %>
+  </table>
 </div>
-<% end %>

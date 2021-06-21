@@ -1,16 +1,22 @@
-<div class="notice"><%= notice %></div>
+<div class="notice col-12"><%= notice %></div>
 
 <%= render 'layouts/base', user: @user, book: @book %>
 
-<div class="col-8">
+<div class="col-7 offset-1">
   <!-- ユーザーの紹介した本一覧 -->
-  <h3>Books</h3>
-  <% @books.each do |book| %>
-    <div>
-      <p>
-        title: <%= link_to book.title, book_path(book.id) %><br>
-        body: <%= book.body %>
-      </p>
-    </div>
-  <% end %>
+  <h3 class="mt-4">Books</h3>
+  <table class="table">
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+    </tr>
+    <% @books.each do |book| %>
+      <tr>
+        <th><%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "50x50" %></th>
+        <th><%= link_to book.title, book_path(book.id) %></th>
+        <th><%= book.body %></th>
+      </tr>
+    <% end %>
+  </table>
 </div>

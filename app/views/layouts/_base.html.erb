@@ -17,7 +17,11 @@
           <th><%= user.introduction %><br></th>
         </tr>
       </table>
-      <%= link_to 'プロフィール変更', edit_user_path(user.id), class: "btn btn-outline-primary btn-block mb-5" %>
+      <% if user == current_user %>
+        <%= link_to 'プロフィール変更', edit_user_path(user.id), class: "btn btn-outline-primary btn-block mb-5" %>
+      <% else %>
+        <%= link_to 'プロフィール不可', user_path(current_user.id), class: "btn btn-outline-warning btn-block mb-5" %>
+      <% end %>
       
       
       <!-- 新規本投稿 -->
