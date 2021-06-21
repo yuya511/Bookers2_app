@@ -1,11 +1,9 @@
 <% if @user.errors.any? %>
-  <div class="error">
-    <ul>
-      <li>errorがあります</li>
+  <div class="error col-12">
+      <div>errorがあります</div>
       <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div><%= message %></div>
       <% end %>
-    </ul>
   </div>
 <% end %>
 

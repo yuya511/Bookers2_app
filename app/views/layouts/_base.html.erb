@@ -1,11 +1,18 @@
+<% if book.errors.any? %>
+  <div class="error col-12">
+      <div>errorがあります</div>
+      <% book.errors.full_messages.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+  </div>
+<% end %>
 
-
-    <div class="col-4">
+    <div class="col-md-3">
       <!-- ユーザーの情報 -->
       <h3 class="mt-4" >User info</h3>
       <table class="table">
         <tr>
-          <th><%= attachment_image_tag user, :profile_image, format: 'jpeg', size: "200x200" %></th>
+          <th><%= attachment_image_tag user, :profile_image, fallback: "サラリーマン.png", format: 'jpeg', size: "200x200" %></th>
           <th></th>
         </tr>
         <tr>
@@ -17,10 +24,8 @@
           <th><%= user.introduction %><br></th>
         </tr>
       </table>
-      <% if user == current_user %>
-        <%= link_to 'プロフィール変更', edit_user_path(user.id), class: "btn btn-outline-primary btn-block mb-5" %>
-      <% else %>
-        <%= link_to 'プロフィール不可', user_path(current_user.id), class: "btn btn-outline-warning btn-block mb-5" %>
+      <%= link_to edit_user_path(user.id), class: "btn btn-outline-primary btn-block mb-5" do %>
+        <i class="fas fa-user-cog">プロフィールの変更</i>
       <% end %>
       
       
