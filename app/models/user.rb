@@ -5,10 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   has_many :books, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
+  
   #refileを使用する上でのルール
   attachment :profile_image
-  
- 
     
   validates :name,
     uniqueness: true,
