@@ -13,20 +13,20 @@
         <th><%= link_to @book.title, book_path(@book.id) %></th>
         <th><%= @book.body %></th>
         <% if @book.user == current_user %>
-        
+
           <th><%= link_to 'Edit', edit_book_path(@book.id), class: 'btn btn-success' %></th>
           <th><%= link_to 'Destroy', "/books/#{@book.id}", class: 'btn btn-danger', method: :delete, data: { confirm: '本当に削除しますか？' } %></th>
-          
+
         <% else %>
-        
+
           <th>
             <% if @book.favorited_by?(current_user) %>
-              <%= link_to book_favorites_path(@book), method: :delete do %>
-                ♥<%= @book.favorites.count %>
+              <%= link_to book_favorites_path(@book, favorite_id: 1), method: :delete do %>
+                <i class="fas fa-heart"><%= @book.favorites.count %></i>
               <% end %>
             <% else %>
-              <%= link_to book_favorites_path(@book), method: :post do %>
-                ♡<%= @book.favorites.count %>
+              <%= link_to book_favorites_path(@book, favorite_id: 1), method: :post do %>
+                <i class="far fa-heart"><%= @book.favorites.count %></i>
               <% end %>
             <% end %>
           </th>
@@ -35,13 +35,29 @@
           </th>
         <% end %>
       </tr>
+      <% @book_comments.each do |book_comment| %>
+        <tr>
+          <th>
+            <%= attachment_image_tag book_comment.user, :profile_image, fallback: "サラリーマン.png", format: 'jpeg', size: "50x50" %><br>
+            <%= link_to book_comment.user.name, user_path(book_comment.user.id)%>
+          </th>
+          <th>
+            <%= book_comment.comment %>
+          </th>
+          <% if current_user.id == book_comment.user_id %>
+            <th>
+              <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), class: "btn btn-danger", method: :delete, data: { confirm: "本当に削除しますか？"} %>
+            </th>
+          <% end %>
+        </tr>
+      <% end %>
   </table>
   <p>
+    <!-- コメントは@bookに結びついた,@book_commentにあるため、インスタンス変数が２ついる
+          ルーティングもネスト(親子関係)しているため２ついる-->
     <%= form_with(model:[@book, @book_comment], local: true) do |f| %>
-      <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
+      <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに", class: "form-control" %>
+      <%= f.submit "送信", class: "mt-3" %>
     <% end %>
   </p>
-  
-          
 </div>
