@@ -17,15 +17,15 @@
           <th><%= link_to 'Edit', edit_book_path(@book.id), class: 'btn btn-success' %></th>
           <th><%= link_to 'Destroy', "/books/#{@book.id}", class: 'btn btn-danger', method: :delete, data: { confirm: '本当に削除しますか？' } %></th>
 
-        <% else %>
+        <% end %>
 
           <th>
             <% if @book.favorited_by?(current_user) %>
-              <%= link_to book_favorites_path(@book, favorite_id: 1), method: :delete do %>
+              <%= link_to "/books/#{@book.id}/favorites", method: :delete do %>
                 <i class="fas fa-heart"><%= @book.favorites.count %></i>
               <% end %>
             <% else %>
-              <%= link_to book_favorites_path(@book, favorite_id: 1), method: :post do %>
+              <%= link_to "/books/#{@book.id}/favorites", method: :post do %>
                 <i class="far fa-heart"><%= @book.favorites.count %></i>
               <% end %>
             <% end %>
@@ -33,7 +33,6 @@
           <th>
             コメント数：<%= @book.book_comments.count %>
           </th>
-        <% end %>
       </tr>
       <% @book_comments.each do |book_comment| %>
         <tr>

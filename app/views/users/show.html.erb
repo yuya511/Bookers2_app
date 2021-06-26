@@ -22,14 +22,14 @@
         <th><%= book.body %></th>
         <th>
           <% if book.favorited_by?(current_user) %>
-            <%= link_to book_favorites_path(book), method: :delete do %>
-              ♥<%= book.favorites.count %>
+            <%= link_to "/books/#{book.id}/favorites", method: :delete do %>
+            <i class="fas fa-heart"><%= book.favorites.count %></i>
             <% end %>
           <% else %>
-            <%= link_to book_favorites_path(book), method: :post do %>
-              ♡<%= book.favorites.count %>
+            <%= link_to "/books/#{book.id}/favorites", method: :post do %>
+            <i class="far fa-heart"><%= book.favorites.count %></i>
             <% end %>
-          <% end %>          
+          <% end %>
         </th>
         <th>
           コメント数：<%= book.book_comments.count %>
